@@ -78,20 +78,6 @@ class Generate_Data:
                 sr - частота
         """
         
-#         stft = librosa.feature.chroma_stft(y=sample,sr=sample_rate,n_fft=2048,hop_length=512,win_length=2048) #частота цветности(по умолчанию 12 баков цветности)12,216 <-216 от duration,win_length=256
-#         mfcc = librosa.feature.mfcc(y=sample,sr=sample_rate)#Мел спектральные коэффициенты ( по умоччанию 20)20,216
-
-#         rmse = (librosa.feature.rms(y=sample)) #среднеквадратич амплитуда 1,216
-#         spec_cent = (librosa.feature.spectral_centroid(y=sample,sr=sample_rate))#спектральный центроид 1,216
-#         spec_bw = (librosa.feature.spectral_bandwidth(y=sample,sr=sample_rate)) #ширина полосы частот 1,216
-#         rolloff = (librosa.feature.spectral_rolloff(y=sample,sr=sample_rate)) #среднее спектрального спада часттоты 1,216
-#         #zcr = np.mean(librosa.feature.zero_crossing_rate(y)) #частота пересечения нуля - можно получить только общее число пересечений или среднее
-
-#         out = []
-#         out = np.concatenate([mfcc,stft,spec_cent,rolloff,rmse,spec_bw],axis=0)
-#         out = np.array(out)
-#         out = np.pad(np.resize(out,(36,120)),((0,0),(0,0)),mode='symmetric')
-#         return out
         norm_sample = librosa.util.normalize(sample)
         stfts = tf.signal.stft(norm_sample, frame_length=1024, frame_step=256, fft_length=1024)
         spectrograms = tf.abs(stfts)
